@@ -22,7 +22,7 @@ namespace vibrance.GUI.common
         private readonly Func<int, string> _resolveLabelLevel;
         private readonly IVibranceProxy _v;
         private IRegistryController _registryController;
-        private const string AppName = "vibranceGUI";
+        private const string AppName = "vibranceGUI - Oma edition";
         private const string TwitterLink = "https://twitter.com/juvlarN";
         private const string PaypalDonationLink = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=JDQFNKNNEW356";
 
@@ -189,11 +189,13 @@ namespace vibrance.GUI.common
             int windowsLevel = 0;
             bool affectPrimaryMonitorOnly = false;
             bool neverSwitchResolution = false;
+            bool neverSwitchWhenRunning = false;
             this.Invoke((MethodInvoker)delegate
             {
                 windowsLevel = trackBarWindowsLevel.Value;
                 affectPrimaryMonitorOnly = checkBoxPrimaryMonitorOnly.Checked;
                 neverSwitchResolution = checkBoxNeverChangeResolutions.Checked;
+                //neverSwitchWhenRunning = checkBoxResolution.Checked;
             });
             SaveVibranceSettings(windowsLevel, affectPrimaryMonitorOnly, neverSwitchResolution);
         }

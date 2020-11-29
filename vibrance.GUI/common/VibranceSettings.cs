@@ -30,6 +30,7 @@ namespace vibrance.GUI.common
                 this.trackBarIngameLevel.Value = setting.IngameLevel;
                 this.cBoxResolution.SelectedItem = setting.ResolutionSettings;
                 this.checkBoxResolution.Checked = setting.IsResolutionChangeNeeded;
+                this.checkBoxResolutionRunning.Checked = setting.IsResolutionChangeNeededRunning;
                 // Necessary to reload the label which tells the percentage
                 trackBarIngameLevel_Scroll(null, null); 
             }
@@ -50,12 +51,12 @@ namespace vibrance.GUI.common
         public ApplicationSetting GetApplicationSetting()
         {
             return new ApplicationSetting(_sender.Text, _sender.Tag.ToString(), this.trackBarIngameLevel.Value, 
-                (ResolutionModeWrapper)this.cBoxResolution.SelectedItem, this.checkBoxResolution.Checked);
+                (ResolutionModeWrapper)this.cBoxResolution.SelectedItem, this.checkBoxResolution.Checked,this.checkBoxResolutionRunning.Checked);
         }
 
         private void checkBoxResolution_CheckedChanged(object sender, EventArgs e)
         {
-            this.cBoxResolution.Enabled = this.checkBoxResolution.Checked;
+            this.cBoxResolution.Enabled = (this.checkBoxResolution.Checked || this.checkBoxResolutionRunning.Checked);
         }
     }
 }

@@ -114,8 +114,8 @@ namespace vibrance.GUI.AMD
                 {
                     //test if a resolution change is needed
                     Screen screen = Screen.FromHandle(e.Handle);
-                    if (_vibranceInfo.neverChangeResolution == false && 
-                        applicationSetting.IsResolutionChangeNeeded && 
+                    if (_vibranceInfo.neverChangeResolution == false &&
+                        (applicationSetting.IsResolutionChangeNeeded || applicationSetting.IsResolutionChangeNeededRunning) && 
                         IsResolutionChangeNeeded(screen, applicationSetting.ResolutionSettings) &&
                         _windowsResolutionSettings.ContainsKey(screen.DeviceName) &&
                         _windowsResolutionSettings[screen.DeviceName].Item2.Contains(applicationSetting.ResolutionSettings))
@@ -139,6 +139,16 @@ namespace vibrance.GUI.AMD
                     IntPtr processHandle = e.Handle;
                     if (GetForegroundWindow() != processHandle)
                         return;
+
+                    //Tony
+                    foreach (var appSet in _applicationSettings)
+                    {
+                        if (Process.GetProcessesByName(appSet.Name).Length > 0 && appSet.IsResolutionChangeNeededRunning)
+                        {
+                            return;
+                        }
+                    }
+                    //EOF Tony
 
                     //test if a resolution change is needed
                     Screen screen = Screen.FromHandle(processHandle);

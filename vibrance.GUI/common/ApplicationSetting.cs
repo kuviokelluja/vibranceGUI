@@ -9,18 +9,20 @@ namespace vibrance.GUI.common
         public string FileName { get; set; }
         public int IngameLevel { get; set; }
         public bool IsResolutionChangeNeeded { get; set; }
+        public bool IsResolutionChangeNeededRunning { get; set; }
         [XmlElement(IsNullable = true)]
         public ResolutionModeWrapper ResolutionSettings { get; set; }
 
         public ApplicationSetting(){ }
 
-        public ApplicationSetting(string name, string fileName, int ingameLevel, ResolutionModeWrapper resolutionSettings, bool isResolutionChangeNeeded)
+        public ApplicationSetting(string name, string fileName, int ingameLevel, ResolutionModeWrapper resolutionSettings, bool isResolutionChangeNeeded, bool isResolutionChangeNeededRunning)
         {
             this.Name = name;
             this.FileName = fileName;
             this.IngameLevel = ingameLevel;
             this.ResolutionSettings = resolutionSettings;
             this.IsResolutionChangeNeeded = isResolutionChangeNeeded;
+            this.IsResolutionChangeNeededRunning = isResolutionChangeNeededRunning;
         }
 
         public override bool Equals(object obj)

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -205,10 +206,18 @@ namespace vibrance.GUI.NVIDIA
 
             _vibranceInfo.isInitialized = true;
         }
-
         private static void OnWinEventHook(object sender, WinEventHookEventArgs e)
         {
-            if (_applicationSettings.Count > 0)
+            /*
+            if (isActive )//&& this.checkBoxResolutionRunning.Checked)
+            {
+                if (Process.GetProcessesByName(runningProcess).Length > 0)
+                {
+                    return;
+                }
+            }
+            */
+                if (_applicationSettings.Count > 0)
             {
                 ApplicationSetting applicationSetting = _applicationSettings.FirstOrDefault(x => string.Equals(x.Name, e.ProcessName, StringComparison.OrdinalIgnoreCase));
                 if (applicationSetting != null)
@@ -220,11 +229,12 @@ namespace vibrance.GUI.NVIDIA
                         //test if a resolution change is needed
                         Screen screen = Screen.FromHandle(e.Handle);
                         if (_vibranceInfo.neverChangeResolution == false && 
-                            applicationSetting.IsResolutionChangeNeeded && 
+                            (applicationSetting.IsResolutionChangeNeeded || applicationSetting.IsResolutionChangeNeededRunning ) && 
                             IsResolutionChangeNeeded(screen, applicationSetting.ResolutionSettings) &&
                             _windowsResolutionSettings.ContainsKey(screen.DeviceName) &&
                             _windowsResolutionSettings[screen.DeviceName].Item2.Contains(applicationSetting.ResolutionSettings))
                         {
+
                             PerformResolutionChange(screen, applicationSetting.ResolutionSettings);
                         }
                         _gameScreen = screen;
@@ -239,6 +249,16 @@ namespace vibrance.GUI.NVIDIA
                     if (!isWindowActive(ref processHandle))
                         return;
                     
+                      //Tony
+                    foreach (var appSet in _applicationSettings)
+                    {
+                        if (Process.GetProcessesByName(appSet.Name).Length > 0 && appSet.IsResolutionChangeNeededRunning)
+                        {
+                            return;
+                        }
+                    }
+                    //EOF Tony
+                     
                     //test if a resolution change is needed
                     Screen currentScreen = Screen.FromHandle(processHandle);
                     if (_vibranceInfo.neverChangeResolution == false && 

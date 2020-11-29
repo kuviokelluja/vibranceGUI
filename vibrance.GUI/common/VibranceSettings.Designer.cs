@@ -39,6 +39,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.labelResolution = new System.Windows.Forms.Label();
             this.checkBoxResolution = new System.Windows.Forms.CheckBox();
+            this.checkBoxResolutionRunning = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarIngameLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -76,7 +77,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(100, 231);
+            this.buttonSave.Location = new System.Drawing.Point(100, 251);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 14;
@@ -106,7 +107,7 @@
             // 
             this.cBoxResolution.Enabled = false;
             this.cBoxResolution.FormattingEnabled = true;
-            this.cBoxResolution.Location = new System.Drawing.Point(6, 57);
+            this.cBoxResolution.Location = new System.Drawing.Point(6, 77);
             this.cBoxResolution.Name = "cBoxResolution";
             this.cBoxResolution.Size = new System.Drawing.Size(234, 21);
             this.cBoxResolution.TabIndex = 17;
@@ -115,10 +116,11 @@
             // 
             this.groupBox1.Controls.Add(this.labelResolution);
             this.groupBox1.Controls.Add(this.checkBoxResolution);
+            this.groupBox1.Controls.Add(this.checkBoxResolutionRunning);
             this.groupBox1.Controls.Add(this.cBoxResolution);
             this.groupBox1.Location = new System.Drawing.Point(12, 141);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(246, 84);
+            this.groupBox1.Size = new System.Drawing.Size(246, 104);
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ingame Resolution";
@@ -144,11 +146,22 @@
             this.checkBoxResolution.UseVisualStyleBackColor = true;
             this.checkBoxResolution.CheckedChanged += new System.EventHandler(this.checkBoxResolution_CheckedChanged);
             // 
+            // checkBoxResolutionGamrRunning
+            // 
+            this.checkBoxResolutionRunning.AutoSize = true;
+            this.checkBoxResolutionRunning.Location = new System.Drawing.Point(6, 54);
+            this.checkBoxResolutionRunning.Name = "checkBoxResolutionRunning";
+            this.checkBoxResolutionRunning.Size = new System.Drawing.Size(183, 17);
+            this.checkBoxResolutionRunning.TabIndex = 18;
+            this.checkBoxResolutionRunning.Text = "Change Resolution when game is Running";
+            this.checkBoxResolutionRunning.UseVisualStyleBackColor = true;
+            this.checkBoxResolutionRunning.CheckedChanged += new System.EventHandler(this.checkBoxResolution_CheckedChanged);
+            // 
             // VibranceSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 266);
+            this.ClientSize = new System.Drawing.Size(270, 286);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.labelTitle);
@@ -182,6 +195,7 @@
         private System.Windows.Forms.ComboBox cBoxResolution;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBoxResolution;
+        private System.Windows.Forms.CheckBox checkBoxResolutionRunning;
         private System.Windows.Forms.Label labelResolution;
     }
 }
